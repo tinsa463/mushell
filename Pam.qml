@@ -1,10 +1,13 @@
 import qs.Data
 import QtQuick
 import Quickshell
+import Quickshell.Wayland
 import Quickshell.Services.Pam
 
 Scope {
 	id: root
+
+	required property WlSessionLock lock
 
 	property string currentText: ""
 	property bool showFailure: false
@@ -12,7 +15,6 @@ Scope {
 	property bool unlocking: false
 
 	signal failed
-	signal unlocked
 
 	onCurrentTextChanged: showFailure = false
 
@@ -38,8 +40,7 @@ Scope {
 
 		onCompleted: result => {
 			if (result === PamResult.Success) {
-				root.unlocking = true;
-				root.unlocked();
+				root.lock.locked = false;
 			} else {
 				root.currentText = "";
 				root.showFailure = true;

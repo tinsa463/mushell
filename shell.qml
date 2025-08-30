@@ -1,16 +1,14 @@
 import qs.Data
 import QtQuick
 import Quickshell
+import Quickshell.Io
 import Quickshell.Wayland
 
 ShellRoot {
 	Pam {
 		id: lockContext
 
-		onUnlocked: {
-			lock.locked = false;
-			Qt.quit();
-		}
+		lock: lock
 	}
 
 	WlSessionLock {
@@ -18,11 +16,28 @@ ShellRoot {
 
 		locked: true
 
-		WlSessionLockSurface {
-			LockSurface {
-				anchors.fill: parent
-				context: lockContext
-			}
+		signal unlocked
+
+		LockSurface {
+			id: surface
+
+			lock: lock
+
+			context: lockContext
+		}
+	}
+
+	IpcHandler {
+		target: "lock"
+
+		function lock(): void {
+			lock.locked = true;
+		}
+		function unlock(): void {
+			lock.unlocked();
+		}
+		function isLocked(): void {
+			return lock.locked;
 		}
 	}
 }
