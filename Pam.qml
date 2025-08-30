@@ -1,0 +1,51 @@
+import qs.Data
+import QtQuick
+import Quickshell
+import Quickshell.Services.Pam
+
+Scope {
+	id: root
+
+	property string currentText: ""
+	property bool showFailure: false
+	property bool unlockInProgress: false
+	property bool unlocking: false
+
+	signal failed
+	signal unlocked
+
+	onCurrentTextChanged: showFailure = false
+
+	function tryUnlock() {
+		if (currentText === "")
+			return;
+
+		unlockInProgress = true;
+		pam.start();
+	}
+
+	PamContext {
+		id: pam
+
+		config: "password.conf"
+		configDirectory: "pam"
+
+		onPamMessage: {
+			if (this.responseRequired) {
+				this.respond(root.currentText);
+			}
+		}
+
+		onCompleted: result => {
+			if (result === PamResult.Success) {
+				root.unlocking = true;
+				root.unlocked();
+			} else {
+				root.currentText = "";
+				root.showFailure = true;
+			}
+
+			root.unlockInProgress = false;
+		}
+	}
+}
