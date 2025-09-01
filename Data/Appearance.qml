@@ -6,7 +6,6 @@ import QtQuick
 Singleton {
 	id: root
 
-	// Colors
 	readonly property QtObject colors: QtObject {
 		readonly property color background: "#171216"
 		readonly property color error: "#ffb4ab"
@@ -65,7 +64,7 @@ Singleton {
 
 	// Fonts
 	readonly property QtObject fonts: QtObject {
-		readonly property string family_Clock: "ProggyClean Nerd Font"
+		readonly property string family_Clock: "14 SegmentLED"
 		readonly property string family_Material: "Material Symbols Rounded"
 		readonly property string family_Mono: "Hack"
 		readonly property string family_Sans: "Rubik"
@@ -104,5 +103,31 @@ Singleton {
 			property int normal: 400 * scale
 			property int small: 200 * scale
 		}
+	}
+
+	readonly property QtObject rounding: QtObject {
+		property real scale: 1
+		property int small: 12 * scale
+		property int normal: 17 * scale
+		property int large: 25 * scale
+		property int full: 1000 * scale
+	}
+
+	readonly property QtObject spacing: QtObject {
+		property real scale: 1
+		property int small: 7 * scale
+		property int smaller: 10 * scale
+		property int normal: 12 * scale
+		property int larger: 15 * scale
+		property int large: 20 * scale
+	}
+
+	readonly property QtObject padding: QtObject {
+		property real scale: 1
+		property int small: 5 * scale
+		property int smaller: 7 * scale
+		property int normal: 10 * scale
+		property int larger: 12 * scale
+		property int large: 15 * scale
 	}
 }

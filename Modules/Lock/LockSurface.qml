@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import qs.Data
 
 import QtQuick
@@ -11,8 +13,10 @@ import Quickshell.Wayland
 WlSessionLockSurface {
 	id: root
 
-	required property Pam context
 	required property WlSessionLock lock
+	required property Pam pam
+
+	property bool isWallReady: false
 
 	Rectangle {
 		id: surface
@@ -40,23 +44,9 @@ WlSessionLockSurface {
 			visible: false
 			opacity: 0
 
-			onStatusChanged: {
-				if (status === Image.Ready) {
-					fadeIn.start();
-				}
-			}
-
-			NumberAnimation {
-				id: fadeIn
-				target: wall
-				property: "opacity"
-				from: 0
-				to: 1
-				duration: Appearance.animations.durations.small * 1.2
-				easing.type: Easing.BezierSpline
-				easing.bezierCurve: Appearance.animations.curves.emphasizedAccel
-			}
+			onStatusChanged: root.isWallReady = true
 		}
+
 		MultiEffect {
 			source: wall
 			anchors.fill: wall
@@ -77,8 +67,11 @@ WlSessionLockSurface {
 		}
 
 		ColumnLayout {
+			id: clockContainer
+
 			anchors.centerIn: parent
 			spacing: 5
+			opacity: 0
 
 			property var currentDate: new Date()
 
@@ -133,6 +126,10 @@ WlSessionLockSurface {
 		}
 
 		ColumnLayout {
+			id: inputContainer
+
+			opacity: 0
+
 			anchors {
 				horizontalCenter: parent.horizontalCenter
 				bottom: parent.bottom
@@ -142,8 +139,8 @@ WlSessionLockSurface {
 				id: incorrectPasswordText
 				text: "Incorrect password"
 				color: Appearance.colors.on_error
-				visible: root.context.showFailure
-				opacity: root.context.showFailure ? 1 : 0
+				visible: root.pam ? root.pam.showFailure : false
+				opacity: (root.pam && root.pam.showFailure) ? 1 : 0
 
 				Behavior on opacity {
 					PropertyAnimation {
@@ -159,9 +156,9 @@ WlSessionLockSurface {
 					id: passwordBox
 
 					echoMode: TextInput.Password
-					enabled: !root.context.unlockInProgress
 					focus: true
-					color: root.context.unlockInProgress ? Appearance.colors.on_error : Appearance.colors.on_background
+					enabled: !root.pam.unlockInProgress
+					color: root.pam.unlockInProgress ? Appearance.colors.on_error : Appearance.colors.on_background
 					background: Rectangle {
 						anchors.fill: parent
 						color: Appearance.colors.withAlpha(Appearance.colors.background, 0.25)
@@ -188,21 +185,57 @@ WlSessionLockSurface {
 					implicitWidth: 400
 					inputMethodHints: Qt.ImhSensitiveData
 					padding: 10
-					onAccepted: {
-						onStatusChanged: {
-							root.context.tryUnlock();
-						}
-					}
-					onTextChanged: root.context.currentText = this.text
+					onAccepted: if (root.pam)
+						root.pam.tryUnlock()
+					onTextChanged: if (root.pam)
+						root.pam.currentText = this.text
 					Layout.alignment: Qt.AlignVBottom
 					Connections {
 						function onCurrentTextChanged() {
-							passwordBox.text = root.context.currentText;
+							passwordBox.text = root.pam.currentText;
 						}
-						target: root.context
+						target: root.pam
 					}
 				}
 			}
+		}
+	}
+
+	NumberAnimation {
+		target: wall
+		running: root.isWallReady
+		property: "opacity"
+		from: 0
+		to: 1
+		duration: Appearance.animations.durations.small * 1.2
+		easing.type: Easing.BezierSpline
+		easing.bezierCurve: Appearance.animations.curves.emphasizedAccel
+		onFinished: {
+			initAnim.start();
+		}
+	}
+
+	SequentialAnimation {
+		id: initAnim
+
+		NumberAnimation {
+			target: clockContainer
+			property: "opacity"
+			from: 0
+			to: 1
+			duration: Appearance.animations.durations.large
+			easing.type: Easing.BezierSpline
+			easing.bezierCurve: Appearance.animations.curves.emphasizedAccel
+		}
+
+		NumberAnimation {
+			target: inputContainer
+			property: "opacity"
+			from: 0
+			to: 1
+			duration: Appearance.animations.durations.normal
+			easing.type: Easing.BezierSpline
+			easing.bezierCurve: Appearance.animations.curves.emphasizedAccel
 		}
 	}
 }

@@ -1,4 +1,5 @@
 import qs.Data
+
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
@@ -14,8 +15,6 @@ Scope {
 	property bool unlockInProgress: false
 	property bool unlocking: false
 
-	signal failed
-
 	onCurrentTextChanged: showFailure = false
 
 	function tryUnlock() {
@@ -30,7 +29,7 @@ Scope {
 		id: pam
 
 		config: "password.conf"
-		configDirectory: "pam"
+		configDirectory: "root:/Assets/pam.d"
 
 		onPamMessage: {
 			if (this.responseRequired) {

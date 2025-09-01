@@ -1,43 +1,23 @@
-import qs.Data
+//@ pragma UseQApplication
+import qs.Modules.Lock
+import qs.Modules.Bar
+
 import QtQuick
 import Quickshell
-import Quickshell.Io
-import Quickshell.Wayland
 
 ShellRoot {
-	Pam {
-		id: lockContext
+	Bar {}
+	Lock {}
 
-		lock: lock
-	}
-
-	WlSessionLock {
-		id: lock
-
-		locked: true
-
-		signal unlocked
-
-		LockSurface {
-			id: surface
-
-			lock: lock
-
-			context: lockContext
+	Connections {
+		function onReloadCompleted() {
+			Quickshell.inhibitReloadPopup();
 		}
-	}
 
-	IpcHandler {
-		target: "lock"
+		function onReloadFailed() {
+			Quickshell.inhibitReloadPopup();
+		}
 
-		function lock(): void {
-			lock.locked = true;
-		}
-		function unlock(): void {
-			lock.unlocked();
-		}
-		function isLocked(): void {
-			return lock.locked;
-		}
+		target: Quickshell
 	}
 }
