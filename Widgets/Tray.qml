@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.SystemTray
 import Quickshell.Widgets
@@ -8,21 +9,31 @@ Rectangle {
 	id: root
 	property var parentWindow: null
 	property var parentScreen: null
-	property real widgetHeight: 30
+	property real widgetHeight: 25
 	readonly property real horizontalPadding: Appearance.spacing.normal
-	readonly property int calculatedWidth: SystemTray.items.values.length > 0 ? SystemTray.items.values.length * Appearance.spacing.large + horizontalPadding * 2 : 0
 
-	width: calculatedWidth
+	Layout.preferredWidth: systemTrayRow.width + horizontalPadding * 2
+	Layout.minimumWidth: visible ? horizontalPadding * 2 : 0
+
+	// width: calculatedWidth
 	height: widgetHeight
 	radius: Appearance.rounding.small
 	border.color: Appearance.colors.on_background
 	color: Appearance.colors.background
 	visible: SystemTray.items.values.length > 0
 
+	Behavior on Layout.preferredWidth {
+		NumberAnimation {
+			duration: Appearance.animations.durations.normal
+			easing.type: Easing.BezierSpline
+			easing.bezierCurve: Appearance.animations.curves.standard
+		}
+	}
+
 	Row {
 		id: systemTrayRow
 		anchors.centerIn: parent
-		spacing: 5
+		spacing: 0
 
 		Repeater {
 			model: SystemTray.items.values
@@ -55,17 +66,17 @@ Rectangle {
 					Behavior on color {
 						enabled: trayItemArea.containsMouse !== undefined
 						NumberAnimation {
-							duration: Appearance.animation.durations.normal
+							duration: Appearance.animations.durations.normal
 							easing.type: Easing.BezierSpline
-							easing.bezierCurve: Appearance.animation.curves.standard
+							easing.bezierCurve: Appearance.animations.curves.standard
 						}
 					}
 				}
 
 				IconImage {
 					anchors.centerIn: parent
-					width: 16
-					height: 16
+					width: Appearance.fonts.large
+					height: Appearance.fonts.large
 					source: parent.iconSource
 					asynchronous: true
 					smooth: true
@@ -89,10 +100,8 @@ Rectangle {
 						}
 
 						if (trayItem.hasMenu) {
-							// Cari window Quickshell yang valid dari hierarchy
 							var validWindow = root.parentWindow;
 							if (!validWindow) {
-								// Fallback: cari window dari parent chain
 								var item = root.parent;
 								while (item && !validWindow) {
 									if (item.toString().includes("WlrLayershell")) {

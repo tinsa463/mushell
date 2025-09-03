@@ -2,9 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
-import Quickshell.Wayland
 import qs.Data
-import qs.Widgets
 
 Scope {
 	Variants {
@@ -19,11 +17,11 @@ Scope {
 				right: true
 				top: true
 			}
-			color: "transparent"
+			color: Appearance.colors.background
 			screen: modelData
 			exclusionMode: ExclusionMode.Auto
 			focusable: false
-			implicitHeight: 35
+			implicitHeight: 30
 			exclusiveZone: 1
 			surfaceFormat.opaque: false
 
@@ -33,24 +31,24 @@ Scope {
 				anchors.margins: 4
 
 				RowLayout {
+					width: parent.width
 					anchors.fill: parent
-					spacing: 0
 
 					Left {
 						Layout.fillHeight: true
-						Layout.preferredWidth: parent.width / 3
+						Layout.preferredWidth: parent.width / 6 
 						Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
 					}
 
 					Middle {
 						Layout.fillHeight: true
-						Layout.preferredWidth: parent.width / 3
+						Layout.preferredWidth: parent.width / 6 
 						Layout.alignment: Qt.AlignCenter
 					}
 
 					Right {
 						Layout.fillHeight: true
-						Layout.preferredWidth: parent.width / 3
+						Layout.preferredWidth: parent.width / 6 
 						Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
 					}
 				}

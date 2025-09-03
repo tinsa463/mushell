@@ -14,29 +14,36 @@ Item {
 		spacing: Appearance.spacing.small
 		
 		Clock {
-			Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-		}
-		Tray {
-			Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-			parentWindow: root
-			parentScreen: root.modelData
+			Layout.alignment: Qt.AlignVCenter
+			Layout.maximumWidth: implicitWidth
 		}
 		PowerProfiles {
-			Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+			Layout.alignment: Qt.AlignVCenter
+			Layout.maximumWidth: implicitWidth
 		}
 		Sound {
-			Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+			Layout.alignment: Qt.AlignVCenter
+			Layout.maximumWidth: implicitWidth
 		}
 		Sound {
-			Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+			Layout.alignment: Qt.AlignVCenter
+			Layout.maximumWidth: implicitWidth
 			node: Pipewire.defaultAudioSource
 		}
 		Battery {
-			Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+			Layout.alignment: Qt.AlignVCenter
+			Layout.maximumWidth: implicitWidth
+		}
+		Tray {
+			Layout.alignment: Qt.AlignVCenter
+            Layout.maximumWidth: calculatedWidth
+			// Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+			parentWindow: root
+			parentScreen: root.modelData
 		}
 		
-		Item {
-			Layout.fillWidth: true
-		}
+		// Item {
+		// 	Layout.fillWidth: true
+		// }
 	}
 }
