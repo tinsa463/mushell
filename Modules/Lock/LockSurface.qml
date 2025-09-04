@@ -26,8 +26,8 @@ WlSessionLockSurface {
 
 	Rectangle {
 		id: surface
+		
 		anchors.fill: parent
-
 		property color clockColor: Appearance.colors.primary_container
 		property string path
 		color: Appearance.colors.background
@@ -44,16 +44,16 @@ WlSessionLockSurface {
 		}
 		Image {
 			id: wall
+
+			anchors.fill: parent
 			antialiasing: true
 			asynchronous: true
 			retainWhileLoading: true
 			smooth: true
 			source: `${surface.path}`
-			fillMode: Image.PreserveAspectCrop
+			fillMode: Image.PreserveAspectFit
 			visible: false
 			opacity: 0
-			width: parent.width
-			height: parent.width
 
 			onStatusChanged: root.isWallReady = true
 		}
@@ -104,7 +104,7 @@ WlSessionLockSurface {
 			}
 
 			Label {
-				font.pointSize: Appearance.fonts.extraLarge * 4
+				font.pixelSize: Appearance.fonts.extraLarge * 4
 				font.family: Appearance.fonts.family_Clock
 				font.bold: true
 				color: surface.clockColor
@@ -118,7 +118,7 @@ WlSessionLockSurface {
 			}
 
 			Label {
-				font.pointSize: Appearance.fonts.medium * 2
+				font.pixelSize: Appearance.fonts.medium * 2
 				font.family: Appearance.fonts.family_Mono
 				color: surface.clockColor
 				renderType: Text.NativeRendering
@@ -127,7 +127,7 @@ WlSessionLockSurface {
 			}
 
 			Label {
-				font.pointSize: Appearance.fonts.smaller * 3.5
+				font.pixelSize: Appearance.fonts.medium * 3.5
 				font.family: Appearance.fonts.family_Sans
 				color: Appearance.colors.on_primary
 				renderType: Text.NativeRendering
