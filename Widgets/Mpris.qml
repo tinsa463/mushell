@@ -61,8 +61,7 @@ Rectangle {
 
 						MatIcon {
 							color: Appearance.colors.primary
-							fill: mArea.containsMouse
-							font.pixelSize: Appearance.fonts.normal * 1.4
+							font.pointSize: Appearance.fonts.normal * 1.2
 							icon: mediaContainer.player.playbackState === MprisPlaybackState.Playing ? "genres" : "play_circle"
 						}
 

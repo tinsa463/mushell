@@ -14,11 +14,11 @@ Scope {
 
 		watchChanges: true
 		onFileChanged: {
-			this.reload()
+			this.reload();
 			Quickshell.execDetached({
 				// What the fuck is this
 				command: ["sh", "-c", `${Quickshell.shellDir}/Assets/generate_colors.sh ${Quickshell.shellDir}/Data/Appearance.qml && ${Quickshell.shellDir}/Assets/generate_colors.sh ${Quickshell.shellDir}/Data/Appearance.qml`]
-			})
+			});
 		}
 		onAdapterUpdated: writeAdapter()
 	}
@@ -50,10 +50,10 @@ Scope {
 			Image {
 				id: img
 
-				antialiasing: true
+				antialiasing: false
 				asynchronous: true
 				layer.enabled: true
-				retainWhileLoading: true
+				// retainWhileLoading: true
 				smooth: true
 
 				source: {

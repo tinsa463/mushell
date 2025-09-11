@@ -60,13 +60,14 @@ Rectangle {
 				height: 30
 
 				Rectangle {
+					id: bgTrayIcon
 					anchors.fill: parent
-					radius: Appearance.rounding.small
-					color: trayItemArea.containsMouse ? Appearance.colors.primary : ""
+					radius: Appearance.rounding.normal
+					color: trayItemArea.containsMouse ? Appearance.colors.primary : "transparent"
+
 					Behavior on color {
-						enabled: trayItemArea.containsMouse !== undefined
-						NumberAnimation {
-							duration: Appearance.animations.durations.normal
+						ColorAnimation {
+							duration: 200
 							easing.type: Easing.BezierSpline
 							easing.bezierCurve: Appearance.animations.curves.standard
 						}
@@ -75,8 +76,8 @@ Rectangle {
 
 				IconImage {
 					anchors.centerIn: parent
-					width: Appearance.fonts.large * 1.2 
-					height: Appearance.fonts.large * 1.2 
+					width: Appearance.fonts.large * 1.2
+					height: Appearance.fonts.large * 1.2
 					source: parent.iconSource
 					asynchronous: true
 					smooth: true
