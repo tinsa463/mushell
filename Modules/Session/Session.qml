@@ -8,6 +8,7 @@ import QtQuick.Layouts
 
 import qs.Data
 import qs.Helpers
+import qs.Components
 
 Scope {
 	id: session
@@ -94,11 +95,7 @@ Scope {
 								color: isHighlighted ? Appearance.colors.withAlpha(Appearance.colors.secondary, 0.2) : "transparent"
 
 								Behavior on color {
-									ColorAnimation {
-										duration: Appearance.animations.durations.normal
-										easing.type: Easing.BezierSpline
-										easing.bezierCurve: Appearance.animations.curves.standard
-									}
+									ColAnim {}
 								}
 
 								MatIcon {
@@ -120,11 +117,7 @@ Scope {
 									scale: mouseArea.pressed ? 0.95 : 1.0
 
 									Behavior on scale {
-										NumberAnimation {
-											duration: Appearance.animations.durations.normal
-											easing.type: Easing.BezierSpline
-											easing.bezierCurve: Appearance.animations.curves.standard
-										}
+										NumbAnim {}
 									}
 
 									MouseArea {

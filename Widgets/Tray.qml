@@ -5,7 +5,9 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.SystemTray
 import Quickshell.Widgets
+
 import qs.Data
+import qs.Components
 
 Rectangle {
 	id: root
@@ -26,11 +28,7 @@ Rectangle {
 	visible: SystemTray.items.values.length > 0
 
 	Behavior on Layout.preferredWidth {
-		NumberAnimation {
-			duration: Appearance.animations.durations.normal
-			easing.type: Easing.BezierSpline
-			easing.bezierCurve: Appearance.animations.curves.standard
-		}
+		NumbAnim {}
 	}
 
 	Row {

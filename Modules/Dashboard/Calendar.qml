@@ -3,7 +3,6 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import Quickshell
 
 import qs.Data
 import qs.Helpers
@@ -205,9 +204,5 @@ Rectangle {
 				}
 			}
 		}
-
-		// Item {
-		// 	Layout.fillHeight: true
-		// }
 	}
 }

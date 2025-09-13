@@ -35,9 +35,5 @@ Item {
 			Layout.alignment: Qt.AlignVCenter
 			Layout.maximumWidth: implicitWidth
 		}
-
-		// Item {
-		// 	Layout.fillWidth: true
-		// }
 	}
 }

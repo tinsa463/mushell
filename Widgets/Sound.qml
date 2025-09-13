@@ -21,11 +21,7 @@ Rectangle {
 	radius: 5
 
 	Behavior on implicitWidth {
-		NumberAnimation {
-			duration: Appearance.animations.durations.normal
-			easing.type: Easing.BezierSpline
-			easing.bezierCurve: Appearance.animations.curves.standard
-		}
+		NumbAnim {}
 	}
 
 	PwObjectTracker {

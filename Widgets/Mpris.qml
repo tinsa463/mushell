@@ -47,11 +47,7 @@ Rectangle {
 					onWidthChanged: mArea.contentWidth = Math.max(rect.baseWidth, width + 20)
 
 					Behavior on width {
-						NumberAnimation {
-							duration: Appearance.animations.durations.normal
-							easing.type: Easing.BezierSpline
-							easing.bezierCurve: Appearance.animations.curves.standard
-						}
+						NumbAnim {}
 					}
 
 					RowLayout {
@@ -72,14 +68,14 @@ Rectangle {
 							text: mediaContainer.player.trackArtist > 25 ? mediaContainer.player.trackArtist.substring(0, 25 - 3) + "..." : (mediaContainer.player.trackArtist || "")
 							color: Appearance.colors.on_background
 						}
+					}
 
-						MouseArea {
-							anchors.fill: parent
+					MouseArea {
+						anchors.fill: mediaInfo
 
-							cursorShape: Qt.PointingHandCursor
-							hoverEnabled: true
-							onClicked: mediaContainer.isPlayerShow = !mediaContainer.isPlayerShow
-						}
+						cursorShape: Qt.PointingHandCursor
+						hoverEnabled: true
+						onClicked: mediaContainer.isPlayerShow = !mediaContainer.isPlayerShow
 					}
 
 					RowLayout {
@@ -92,9 +88,7 @@ Rectangle {
 						visible: opacity > 0
 
 						Behavior on opacity {
-							NumberAnimation {
-								duration: Appearance.animations.durations.small
-							}
+							NumbAnim {}
 						}
 
 						Repeater {
@@ -140,15 +134,11 @@ Rectangle {
 									scale: clickArea.pressed ? 0.95 : 1.0
 
 									Behavior on opacity {
-										NumberAnimation {
-											duration: 150
-										}
+										NumbAnim {}
 									}
 
 									Behavior on scale {
-										NumberAnimation {
-											duration: 100
-										}
+										NumbAnim {}
 									}
 								}
 

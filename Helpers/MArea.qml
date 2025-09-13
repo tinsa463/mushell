@@ -1,6 +1,6 @@
 import QtQuick
 
-import qs.Data
+import qs.Components
 
 MouseArea {
 	id: area
@@ -8,10 +8,7 @@ MouseArea {
 	property real clickOpacity: 0.2
 	property real hoverOpacity: 0.08
 	property color layerColor: "white"
-	property NumberAnimation layerOpacityAnimation: NumberAnimation {
-		duration: Appearance.animations.durations.normal
-		easing.type: Easing.InOutQuad
-	}
+	property NumberAnimation layerOpacityAnimation: NumbAnim {}
 	property int layerRadius: parent?.radius ?? 0
 	property alias layerRect: layer
 

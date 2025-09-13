@@ -2,14 +2,12 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Effects
 
 import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
 
 import qs.Data
-import qs.Components
 import "Inbox" as Inbox
 import "Quicksettings" as QS
 

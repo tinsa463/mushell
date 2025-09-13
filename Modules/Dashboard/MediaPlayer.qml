@@ -69,7 +69,7 @@ Rectangle {
 		Rectangle {
 			anchors.fill: parent
 
-			color: root.player.trackArtUrl.length > 0 ? Appearance.colors.withAlpha(Appearance.colors.shadow, 0.1) : "transparent"
+			color: root.player === null ? "transparent" : Appearance.colors.withAlpha(Appearance.colors.shadow, 0.1)
 		}
 	}
 
@@ -118,7 +118,7 @@ Rectangle {
 							property string notFoundImage: Qt.resolvedUrl(Quickshell.shellDir + "/Assets/image_not_found.svg")
 
 							visible: false
-							source: root.player.trackArtUrl.length > 0 ? root.player.trackArtUrl : notFoundImage
+							source: root.player === null ? notFoundImage : root.player.trackArtUrl
 							fillMode: Image.PreserveAspectCrop
 						}
 
@@ -144,13 +144,13 @@ Rectangle {
 
 					Column {
 						anchors.horizontalCenter: parent.horizontalCenter
-						spacing: 8
+						spacing: Appearance.spacing.small
 
 						StyledText {
 							id: titleText
 
 							anchors.horizontalCenter: parent.horizontalCenter
-							text: root.player.trackTitle.length > 0 ? root.player.trackTitle : "null"
+							text: root.player === null ? "null" : root.player.trackTitle
 							color: Appearance.colors.on_background
 							font.pixelSize: Appearance.fonts.medium * 1.5
 							font.bold: true
@@ -163,7 +163,7 @@ Rectangle {
 							id: artistText
 
 							anchors.horizontalCenter: parent.horizontalCenter
-							text: root.player.trackArtist.length > 0 ? root.player.trackArtist : "null"
+							text: root.player === null ? "null" : root.player.trackArtist
 							color: Appearance.colors.on_background
 							font.pixelSize: Appearance.fonts.medium * 1.1
 							opacity: 0.8
@@ -221,15 +221,11 @@ Rectangle {
 									scale: clickArea.pressed ? 0.95 : 1.0
 
 									Behavior on opacity {
-										NumberAnimation {
-											duration: 150
-										}
+										NumbAnim {}
 									}
 
 									Behavior on scale {
-										NumberAnimation {
-											duration: 100
-										}
+										NumbAnim {}
 									}
 								}
 
@@ -260,7 +256,7 @@ Rectangle {
 							id: timeTrack
 
 							anchors.horizontalCenter: parent.horizontalCenter
-							text: root.player.position > 0 ? root.formatTime(root.player.position) : "00:00"
+							text: root.player === null ? "00:00" : root.formatTime(root.player.position)
 							color: Appearance.colors.on_background
 
 							Timer {

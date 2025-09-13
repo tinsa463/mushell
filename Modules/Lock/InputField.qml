@@ -26,13 +26,12 @@ RowLayout {
 			color: passwordBox.activeFocus ? Appearance.colors.surface_container_high : Appearance.colors.surface_container
 
 			border.color: {
-				if (!passwordBox.enabled) {
+				if (!passwordBox.enabled)
 					return Appearance.colors.withAlpha(Appearance.colors.outline, 0.12);
-				} else if (passwordBox.activeFocus) {
+				else if (passwordBox.activeFocus)
 					return Appearance.colors.primary;
-				} else {
+				else
 					return Appearance.colors.outline;
-				}
 			}
 
 			border.width: passwordBox.activeFocus ? 2 : 1
@@ -144,14 +143,14 @@ RowLayout {
 			visible: root.pam.unlockInProgress
 			opacity: visible ? 1 : 0
 
-			RotationAnimator {
-				target: root
-				running: root.pam.unlockInProgress
-				from: 0
-				to: 360
-				duration: Appearance.animations.durations.extraLarge
-				loops: Animation.Infinite
-			}
+			// RotationAnimator {
+			// 	target: root
+			// 	running: root.pam.unlockInProgress
+			// 	from: 0
+			// 	to: 360
+			// 	duration: Appearance.animations.durations.extraLarge
+			// 	loops: Animation.Infinite
+			// }
 
 			Behavior on opacity {
 				PropertyAnimation {

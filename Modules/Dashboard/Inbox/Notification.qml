@@ -306,19 +306,13 @@ Rectangle {
 									}
 
 									Behavior on color {
-										ColorAnimation {
-											duration: Appearance.animations.durations.small
-										}
+										ColAnim {}
 									}
 									Behavior on border.color {
-										ColorAnimation {
-											duration: Appearance.animations.durations.small
-										}
+										ColAnim {}
 									}
 									Behavior on border.width {
-										NumberAnimation {
-											duration: Appearance.animations.durations.small
-										}
+										NumbAnim {}
 									}
 								}
 							}

@@ -12,7 +12,7 @@ Text {
 	font.pixelSize: Appearance.fonts.medium
 	font.hintingPreference: Font.PreferFullHinting
 
-	antialiasing: false
+	antialiasing: true
 
 	verticalAlignment: Text.AlignVCenter
 	horizontalAlignment: Text.AlignHCenter

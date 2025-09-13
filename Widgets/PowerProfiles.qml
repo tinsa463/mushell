@@ -2,11 +2,11 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
-import Quickshell
 import Quickshell.Services.UPower
 
 import qs.Data
 import qs.Helpers
+import qs.Components
 
 Rectangle {
 	Layout.fillHeight: true
@@ -17,11 +17,7 @@ Rectangle {
 	radius: 5
 
 	Behavior on implicitWidth {
-		NumberAnimation {
-			duration: Appearance.animations.durations.normal
-			easing.type: Easing.BezierSpline
-			easing.bezierCurve: Appearance.animations.curves.standard
-		}
+		NumbAnim {}
 	}
 
 	MouseArea {
@@ -75,11 +71,7 @@ Rectangle {
 
 						Behavior on visible {
 							enabled: !delegateRoot.isAnimating
-							NumberAnimation {
-								duration: Appearance.animations.durations.normal
-								easing.type: Easing.BezierSpline
-								easing.bezierCurve: Appearance.animations.curves.standard
-							}
+							NumbAnim {}
 						}
 
 						SequentialAnimation {
@@ -96,14 +88,11 @@ Rectangle {
 									easing.type: Easing.BezierSpline
 									easing.bezierCurve: Appearance.animations.curves.emphasizedAccel
 								}
-								NumberAnimation {
+								NumbAnim {
 									target: bgCon
 									property: "opacity"
 									from: 1.0
 									to: 0.7
-									duration: Appearance.animations.durations.small
-									easing.type: Easing.BezierSpline
-									easing.bezierCurve: Appearance.animations.curves.emphasizedAccel
 								}
 							}
 
@@ -116,13 +105,11 @@ Rectangle {
 									easing.type: Easing.BezierSpline
 									easing.bezierCurve: Appearance.animations.curves.emphasizedDecel
 								}
-								NumberAnimation {
+								NumbAnim {
 									target: bgCon
 									property: "opacity"
 									from: 0.7
 									to: 1.0
-									duration: Appearance.animations.durations.normal
-									easing.type: Easing.BezierSpline
 									easing.bezierCurve: Appearance.animations.curves.emphasizedDecel
 								}
 							}
@@ -150,33 +137,28 @@ Rectangle {
 								id: rippleAnimation
 								running: false
 
-								NumberAnimation {
+								NumbAnim {
 									target: rippleEffect
 									property: "width"
 									from: 0
 									to: Math.max(clickArea.width, clickArea.height) * 2
 									duration: Appearance.animations.durations.large
-									easing.type: Easing.BezierSpline
 									easing.bezierCurve: Appearance.animations.curves.expressiveDefaultSpatial
 								}
-
 								SequentialAnimation {
-									NumberAnimation {
+									NumbAnim {
 										target: rippleEffect
 										property: "opacity"
 										from: 0
 										to: 0.3
 										duration: Appearance.animations.durations.small
-										easing.type: Easing.BezierSpline
 										easing.bezierCurve: Appearance.animations.curves.standardAccel
 									}
-									NumberAnimation {
+									NumbAnim {
 										target: rippleEffect
 										property: "opacity"
 										from: 0.3
 										to: 0
-										duration: Appearance.animations.durations.normal
-										easing.type: Easing.BezierSpline
 										easing.bezierCurve: Appearance.animations.curves.standardDecel
 									}
 								}
@@ -262,11 +244,7 @@ Rectangle {
 
 						Behavior on color {
 							enabled: !delegateRoot.isAnimating
-							ColorAnimation {
-								duration: Appearance.animations.durations.normal
-								easing.type: Easing.BezierSpline
-								easing.bezierCurve: Appearance.animations.curves.standard
-							}
+							ColAnim {}
 						}
 					}
 				}

@@ -85,9 +85,9 @@ Scope {
 
 						background: Rectangle {
 							radius: Appearance.rounding.small
-							color: Appearance.colors.withAlpha(Appearance.colors.surface, 0.7)
-							border.color: Appearance.colors.on_background
-							border.width: 2
+							color: Appearance.colors.withAlpha(Appearance.colors.surface, 0)
+							// border.color: Appearance.colors.on_background
+							// border.width: 2
 						}
 
 						onTextChanged: {
@@ -135,10 +135,7 @@ Scope {
 						flickDeceleration: 1500
 
 						Behavior on currentIndex {
-							NumberAnimation {
-								duration: Appearance.animations.durations.small
-								easing.bezierCurve: Appearance.animations.curves.standard
-							}
+							NumbAnim {}
 						}
 
 						onModelChanged: {
@@ -161,10 +158,7 @@ Scope {
 							hoverEnabled: !keyboardActive
 
 							Behavior on itemScale {
-								NumberAnimation {
-									duration: Appearance.animations.durations.small
-									easing.bezierCurve: Appearance.animations.curves.standard
-								}
+								NumbAnim {}
 							}
 
 							onEntered: {
@@ -233,10 +227,7 @@ Scope {
 											opacity = 1;
 										}
 										Behavior on opacity {
-											NumberAnimation {
-												duration: Appearance.animations.durations.normal
-												easing.bezierCurve: Appearance.animations.curves.standard
-											}
+											NumbAnim {}
 										}
 									}
 
@@ -253,10 +244,7 @@ Scope {
 											opacity = 1;
 										}
 										Behavior on opacity {
-											NumberAnimation {
-												duration: Appearance.animations.durations.normal
-												easing.bezierCurve: Appearance.animations.curves.standard
-											}
+											NumbAnim {}
 										}
 									}
 								}
@@ -273,10 +261,7 @@ Scope {
 
 							scale: 0.95
 							Behavior on scale {
-								NumberAnimation {
-									duration: Appearance.animations.durations.small
-									easing.bezierCurve: Appearance.animations.curves.standard
-								}
+								NumbAnim {}
 							}
 
 							Component.onCompleted: {

@@ -29,7 +29,12 @@ Loader {
 
 		implicitWidth: 400
 		height: Math.min(300, notifListView.contentHeight + 20)
-		visible: Notifs.notifications.popupNotifications.length > 0
+		visible: {
+			if (!Notifs.notifications.isDnDDisabled && Notifs.notifications.popupNotifications.length > 0)
+				return true;
+			else
+				return false;
+		}
 
 		ListView {
 			id: notifListView
@@ -340,19 +345,13 @@ Loader {
 									}
 
 									Behavior on color {
-										ColorAnimation {
-											duration: Appearance.animations.durations.small
-										}
+										NumbAnim {}
 									}
 									Behavior on border.color {
-										ColorAnimation {
-											duration: Appearance.animations.durations.small
-										}
+										ColAnim {}
 									}
 									Behavior on border.width {
-										NumberAnimation {
-											duration: Appearance.animations.durations.small
-										}
+										NumbAnim {}
 									}
 								}
 							}

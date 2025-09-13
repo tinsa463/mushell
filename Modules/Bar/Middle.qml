@@ -3,7 +3,6 @@ import QtQuick.Layouts
 import qs.Widgets
 import qs.Data
 
-// Middle.qml
 Item {
 	RowLayout {
 		anchors.centerIn: parent

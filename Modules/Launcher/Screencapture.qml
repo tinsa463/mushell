@@ -140,16 +140,12 @@ Scope {
 										yScale: iconDelegate.index === screencapture.currentIndex ? 1.05 : 1.0
 
 										Behavior on xScale {
-											NumberAnimation {
-												duration: Appearance.animations.durations.normal
-												easing.type: Easing.BezierSpline
+											NumbAnim {
 												easing.bezierCurve: Appearance.animations.curves.expressiveDefaultSpatial
 											}
 										}
 										Behavior on yScale {
-											NumberAnimation {
-												duration: Appearance.animations.durations.normal
-												easing.type: Easing.BezierSpline
+											NumbAnim {
 												easing.bezierCurve: Appearance.animations.curves.expressiveDefaultSpatial
 											}
 										}
@@ -165,9 +161,7 @@ Scope {
 										Layout.alignment: Qt.AlignVCenter
 
 										Behavior on color {
-											ColorAnimation {
-												duration: Appearance.animations.durations.small
-												easing.type: Easing.BezierSpline
+											ColAnim {
 												easing.bezierCurve: Appearance.animations.curves.expressiveDefaultSpatial
 											}
 										}

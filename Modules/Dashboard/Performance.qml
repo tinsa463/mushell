@@ -5,6 +5,11 @@ import qs.Data
 import qs.Components
 
 Rectangle {
+	id: root
+
+	readonly property int diskProp: SysUsage.diskUsed / 1048576
+	readonly property int ramProp: SysUsage.memUsed / 1048576
+
 	anchors.centerIn: parent
 	radius: Appearance.rounding.normal
 	color: Appearance.colors.withAlpha(Appearance.colors.surface, 0.7)
@@ -38,7 +43,7 @@ Rectangle {
 					id: ramText
 
 					Layout.alignment: Qt.AlignHCenter
-					text: "RAM usage"
+					text: "RAM usage" + "\n" + root.ramProp + " GB"
 					color: Appearance.colors.on_surface
 				}
 			}
@@ -91,19 +96,28 @@ Rectangle {
 					value: Math.round(SysUsage.diskUsed / SysUsage.diskTotal * 100)
 					text: value + "%"
 					size: 0
-
-					Component.onCompleted: {
-						console.log(SysUsage.diskUsed);
-					}
 				}
 
 				StyledText {
 					id: diskText
 
 					Layout.alignment: Qt.AlignHCenter
-					text: "Main disk usage"
+					text: "Disk usage" + "\n" + root.diskProp + " GB"
 					color: Appearance.colors.on_surface
 				}
+			}
+		}
+
+		Item {
+			id: networkItem
+
+			Layout.alignment: Qt.AlignLeft
+			Layout.preferredWidth: childrenRect.width
+			Layout.preferredHeight: childrenRect.height
+
+			RowLayout {
+				anchors.left: parent.left
+				spacing: Appearance.spacing.normal
 			}
 		}
 	}

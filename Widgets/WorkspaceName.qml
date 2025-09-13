@@ -20,9 +20,8 @@ Rectangle {
 	radius: 5
 
 	Behavior on implicitWidth {
-		NumberAnimation {
+		NumbAnim {
 			duration: Appearance.animations.durations.small
-			easing.type: Easing.BezierSpline
 			easing.bezierCurve: Appearance.animations.curves.expressiveFastSpatial
 		}
 	}

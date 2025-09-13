@@ -34,7 +34,7 @@ Rectangle {
 					}
 				},
 				{
-					icon: Notifs.notifications.isDnDDisabled ? "notifications_active" : "notifications_off",
+					icon: Notifs.notifications.isDnDDisabled ? "notifications_off" : "notifications_active",
 					action: () => {
 						Notifs.notifications.isDnDDisabled = !Notifs.notifications.isDnDDisabled;
 					}
