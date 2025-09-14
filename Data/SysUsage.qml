@@ -6,14 +6,129 @@ import Quickshell.Io
 
 Singleton {
 	id: root
+
+	// Memory and disk
 	property real memTotal
 	property real memUsed
 	property real diskUsed
 	property real diskTotal
+
+	// Networking
+	readonly property string wiredInterface: "enp0s31f6"
+	readonly property string wirelessInterface: "wlp3s0"
+
+	property var previousData: ({})
+	property var lastUpdateTime: 0
+
+	// Wireless
+	property real wirelessUploadSpeed
+	property real wirelessDownloadSpeed
+
+	property real totalWirelessDownloadUsage
+	property real totalWirelessUploadUsage
+
+	// Wired
+	property real wiredUploadSpeed
+	property real wiredDownloadSpeed
+
+	property real totalWiredDownloadUsage
+	property real totalWiredUploadUsage
+
+	// CPU
 	property real cpuPerc: 0
 	property real lastCpuIdle: 0
 	property real lastCpuTotal: 0
 	property bool initialized: false
+
+	FileView {
+		id: networkInfo
+
+		path: "/proc/net/dev"
+		onLoaded: {
+			const data = text();
+			root.calculateNetworkStats(data);
+		}
+	}
+
+	function parseNetworkData(data) {
+		const lines = data.split('\n');
+		const interfaces = {};
+
+		for (let i = 2; i < lines.length; i++) {
+			const line = lines[i].trim();
+			if (line === '')
+				continue;
+
+			const parts = line.split(/\s+/);
+			if (parts.length < 17)
+				continue;
+
+			const interfaceName = parts[0].replace(':', '');
+
+			interfaces[interfaceName] = {
+				rxBytes: parseInt(parts[1]) || 0,
+				rxPackets: parseInt(parts[2]) || 0,
+				txBytes: parseInt(parts[9]) || 0,
+				txPackets: parseInt(parts[10]) || 0
+			};
+		}
+
+		return interfaces;
+	}
+
+	function calculateNetworkStats(data) {
+		const currentTime = Date.now();
+		const currentData = parseNetworkData(data);
+
+		if (currentData[wirelessInterface]) {
+			totalWirelessDownloadUsage = currentData[wirelessInterface].rxBytes / (1024 * 1024);
+			totalWirelessUploadUsage = currentData[wirelessInterface].txBytes / (1024 * 1024);
+		}
+
+		if (currentData[wiredInterface]) {
+			totalWiredDownloadUsage = currentData[wiredInterface].rxBytes / (1024 * 1024);
+			totalWiredUploadUsage = currentData[wiredInterface].txBytes / (1024 * 1024);
+		}
+
+		if (previousData && Object.keys(previousData).length > 0 && lastUpdateTime > 0) {
+			const timeDiff = (currentTime - lastUpdateTime) / 1000; // dalam detik
+
+			if (timeDiff > 0) {
+				if (currentData[wirelessInterface] && previousData[wirelessInterface]) {
+					const wirelessRxDiff = currentData[wirelessInterface].rxBytes - previousData[wirelessInterface].rxBytes;
+					const wirelessTxDiff = currentData[wirelessInterface].txBytes - previousData[wirelessInterface].txBytes;
+
+					wirelessDownloadSpeed = Math.max(0, wirelessRxDiff / (1024 * 1024) / timeDiff);
+					wirelessUploadSpeed = Math.max(0, wirelessTxDiff / (1024 * 1024) / timeDiff);
+				}
+
+				if (currentData[wiredInterface] && previousData[wiredInterface]) {
+					const wiredRxDiff = currentData[wiredInterface].rxBytes - previousData[wiredInterface].rxBytes;
+					const wiredTxDiff = currentData[wiredInterface].txBytes - previousData[wiredInterface].txBytes;
+
+					wiredDownloadSpeed = Math.max(0, wiredRxDiff / (1024 * 1024) / timeDiff);
+					wiredUploadSpeed = Math.max(0, wiredTxDiff / (1024 * 1024) / timeDiff);
+				}
+			}
+		}
+
+		previousData = JSON.parse(JSON.stringify(currentData));
+		lastUpdateTime = currentTime;
+	}
+
+	function formatSpeed(speedMBps) {
+		if (speedMBps < 0.01)
+			return "0.00 MB/s";
+		if (speedMBps < 1)
+			return (speedMBps * 1024).toFixed(2) + " KB/s";
+		return speedMBps.toFixed(2) + " MB/s";
+	}
+
+	function formatUsage(usageMB) {
+		if (usageMB < 1024)
+			return usageMB.toFixed(2) + " MB";
+		return (usageMB / 1024).toFixed(2) + " GB";
+	}
 
 	FileView {
 		id: meminfo
@@ -117,6 +232,7 @@ Singleton {
 		onTriggered: {
 			stat.reload();
 			meminfo.reload();
+			networkInfo.reload();
 			diskinfo.running = true;
 		}
 	}

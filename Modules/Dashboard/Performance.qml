@@ -19,6 +19,7 @@ Rectangle {
 	GridLayout {
 		anchors.centerIn: parent
 		columns: 3
+		rowSpacing: Appearance.spacing.large * 2
 
 		Item {
 			id: ramItem
@@ -109,15 +110,147 @@ Rectangle {
 		}
 
 		Item {
-			id: networkItem
+			id: networkSpeedItem
 
-			Layout.alignment: Qt.AlignLeft
-			Layout.preferredWidth: childrenRect.width
+			Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+			Layout.preferredWidth: 160
 			Layout.preferredHeight: childrenRect.height
 
-			RowLayout {
-				anchors.left: parent.left
-				spacing: Appearance.spacing.normal
+			ColumnLayout {
+				anchors.top: parent.top
+				anchors.horizontalCenter: parent.horizontalCenter
+				spacing: Appearance.spacing.small
+				width: parent.width
+
+				StyledText {
+					id: wiredDownloadSpeed
+
+					Layout.alignment: Qt.AlignHCenter
+					Layout.fillWidth: true
+					horizontalAlignment: Text.AlignHCenter
+					text: "Wired Download:\n" + SysUsage.formatSpeed(SysUsage.wiredDownloadSpeed)
+					color: Appearance.colors.on_surface
+				}
+
+				StyledText {
+					id: wiredUploadSpeed
+
+					Layout.alignment: Qt.AlignHCenter
+					Layout.fillWidth: true
+					horizontalAlignment: Text.AlignHCenter
+					text: "Wired Upload:\n" + SysUsage.formatSpeed(SysUsage.wiredUploadSpeed)
+					color: Appearance.colors.on_surface
+				}
+
+				StyledText {
+					id: wirelessDownloadSpeed
+
+					Layout.alignment: Qt.AlignHCenter
+					Layout.fillWidth: true
+					horizontalAlignment: Text.AlignHCenter
+					text: "Wireless Download:\n" + SysUsage.formatSpeed(SysUsage.wirelessDownloadSpeed)
+					color: Appearance.colors.on_surface
+				}
+
+				StyledText {
+					id: wirelessUploadSpeed
+
+					Layout.alignment: Qt.AlignHCenter
+					Layout.fillWidth: true
+					horizontalAlignment: Text.AlignHCenter
+					text: "Wireless Upload:\n" + SysUsage.formatSpeed(SysUsage.wirelessUploadSpeed)
+					color: Appearance.colors.on_surface
+				}
+			}
+		}
+
+		Item {
+			id: networkUsageItem
+
+			Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+			Layout.preferredWidth: 160
+			Layout.preferredHeight: childrenRect.height
+
+			ColumnLayout {
+				anchors.top: parent.top
+				anchors.horizontalCenter: parent.horizontalCenter
+				spacing: Appearance.spacing.small
+				width: parent.width
+
+				StyledText {
+					id: wiredDownloadUsage
+
+					Layout.alignment: Qt.AlignHCenter
+					Layout.fillWidth: true
+					horizontalAlignment: Text.AlignHCenter
+					text: "Wired download usage:\n" + SysUsage.formatUsage(SysUsage.totalWiredDownloadUsage)
+					color: Appearance.colors.on_surface
+				}
+
+				StyledText {
+					id: wiredUploadUsage
+
+					Layout.alignment: Qt.AlignHCenter
+					Layout.fillWidth: true
+					horizontalAlignment: Text.AlignHCenter
+					text: "Wired upload usage:\n" + SysUsage.formatUsage(SysUsage.totalWiredUploadUsage)
+					color: Appearance.colors.on_surface
+				}
+
+				StyledText {
+					id: wirelessDownloadUsage
+
+					Layout.alignment: Qt.AlignHCenter
+					Layout.fillWidth: true
+					horizontalAlignment: Text.AlignHCenter
+					text: "Wireless download usage:\n" + SysUsage.formatUsage(SysUsage.totalWirelessDownloadUsage)
+					color: Appearance.colors.on_surface
+				}
+
+				StyledText {
+					id: wirelessUploadUsage
+
+					Layout.alignment: Qt.AlignHCenter
+					Layout.fillWidth: true
+					horizontalAlignment: Text.AlignHCenter
+					text: "Wireless upload usage:\n" + SysUsage.formatUsage(SysUsage.totalWirelessUploadUsage)
+					color: Appearance.colors.on_surface
+				}
+			}
+		}
+
+		Item {
+			id: networkInterfaceItem
+
+			Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+			Layout.preferredWidth: 160
+			Layout.preferredHeight: childrenRect.height
+
+			ColumnLayout {
+				anchors.top: parent.top
+				anchors.horizontalCenter: parent.horizontalCenter
+				spacing: Appearance.spacing.small
+				width: parent.width
+
+				StyledText {
+					id: wiredInterface
+
+					Layout.alignment: Qt.AlignHCenter
+					Layout.fillWidth: true
+					horizontalAlignment: Text.AlignHCenter
+					text: "Wired interface:\n" + SysUsage.wiredInterface
+					color: Appearance.colors.on_surface
+				}
+
+				StyledText {
+					id: wirelessInterface
+
+					Layout.alignment: Qt.AlignHCenter
+					Layout.fillWidth: true
+					horizontalAlignment: Text.AlignHCenter
+					text: "Wireless interface:\n" + SysUsage.wirelessInterface
+					color: Appearance.colors.on_surface
+				}
 			}
 		}
 	}

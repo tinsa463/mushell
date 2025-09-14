@@ -108,7 +108,7 @@ Scope {
 								id: performanceLoader
 
 								Layout.fillWidth: true
-								Layout.fillHeight: true
+								Layout.preferredHeight: 450
 								active: root.isDashboardOpen
 								sourceComponent: Performance {}
 							}
