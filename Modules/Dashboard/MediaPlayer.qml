@@ -31,6 +31,15 @@ Rectangle {
 		color: "transparent"
 		z: -1
 
+		AnimatedImage {
+			id: coverNull
+
+			anchors.fill: parent
+
+			visible: root.player === null
+			source: Qt.resolvedUrl("root:/Assets/kuru.gif")
+		}
+
 		Image {
 			id: coverSource
 
@@ -42,9 +51,11 @@ Rectangle {
 		}
 
 		MultiEffect {
+			autoPaddingEnabled: false
+
 			blurEnabled: true
-			blurMax: 30
-			blur: 1.0
+			blurMax: 40
+			blur: 0.7
 
 			source: coverSource
 			anchors.fill: parent
@@ -66,11 +77,11 @@ Rectangle {
 		}
 
 		// Make title readable
-		Rectangle {
-			anchors.fill: parent
-
-			color: root.player === null ? "transparent" : Appearance.colors.withAlpha(Appearance.colors.shadow, 0.1)
-		}
+		// Rectangle {
+		// 	anchors.fill: parent
+		//
+		// 	color: root.player === null ? "transparent" : Appearance.colors.withAlpha(Appearance.colors.shadow, 0.06)
+		// }
 	}
 
 	function formatTime(seconds) {
@@ -118,7 +129,7 @@ Rectangle {
 							property string notFoundImage: Qt.resolvedUrl(Quickshell.shellDir + "/Assets/image_not_found.svg")
 
 							visible: false
-							source: root.player === null ? notFoundImage : root.player.trackArtUrl
+							source: root.player === null ? notFoundImage : Qt.resolvedUrl(root.player.trackArtUrl)
 							fillMode: Image.PreserveAspectCrop
 						}
 
