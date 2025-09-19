@@ -49,46 +49,32 @@ Scope {
 					width: parent.width
 					anchors.fill: parent
 
-					Loader {
+					Left {
 						Layout.fillHeight: true
 						Layout.preferredWidth: parent.width / 6
 						Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-
-						active: root.isBarOpen
-						asynchronous: true
-
-						sourceComponent: Left {}
 					}
 
-					Loader {
+					Middle {
 						Layout.fillHeight: true
 						Layout.preferredWidth: parent.width / 6
 						Layout.alignment: Qt.AlignCenter
-						active: root.isBarOpen
-						asynchronous: true
-
-						sourceComponent: Middle {}
 					}
 
-					Loader {
+					Right {
 						Layout.fillHeight: true
 						Layout.preferredWidth: parent.width / 6
 						Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-
-						active: root.isBarOpen
-						asynchronous: true
-
-						sourceComponent: Right {}
 					}
 				}
 			}
-		}
-	}
 
-	IpcHandler {
-		target: "layerShell"
-		function toggle(): void {
-			root.isBarOpen = !root.isBarOpen;
+			IpcHandler {
+				target: "layerShell"
+				function toggle(): void {
+					root.isBarOpen = !root.isBarOpen;
+				}
+			}
 		}
 	}
 }
