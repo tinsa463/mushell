@@ -51,8 +51,8 @@ Scope {
 						font.family: "Audiowide"
 						font.italic: true
 						font.bold: true
-						antialiasing: false
-						color: Appearance.colors.withAlpha(Appearance.colors.on_primary_container, 0.2)
+						antialiasing: true
+						color: Appearance.colors.withAlpha(Appearance.colors.surface, 0.5)
 					}
 
 					RowLayout {
@@ -63,8 +63,9 @@ Scope {
 
 							text: Qt.formatDateTime(Time?.date, "dddd")
 							font.pixelSize: Appearance.fonts.large
-							color: Appearance.colors.withAlpha(Appearance.colors.on_primary_container, 0.2)
-							antialiasing: false
+							color: Appearance.colors.withAlpha(Appearance.colors.surface, 0.3)
+							antialiasing: true
+							font.bold: true
 						}
 
 						StyledText {
@@ -72,8 +73,9 @@ Scope {
 
 							text: Qt.formatDateTime(Time?.date, "MMMM")
 							font.pixelSize: Appearance.fonts.large
-							color: Appearance.colors.withAlpha(Appearance.colors.on_primary_container, 0.2)
-							antialiasing: false
+							color: Appearance.colors.withAlpha(Appearance.colors.surface, 0.3)
+							antialiasing: true
+							font.bold: true
 						}
 
 						StyledText {
@@ -81,8 +83,9 @@ Scope {
 
 							text: Qt.formatDateTime(Time?.date, "yyyy")
 							font.pixelSize: Appearance.fonts.large
-							color: Appearance.colors.withAlpha(Appearance.colors.on_primary_container, 0.2)
-							antialiasing: false
+							color: Appearance.colors.withAlpha(Appearance.colors.surface, 0.3)
+							antialiasing: true
+							font.bold: true
 						}
 
 						IconImage {
@@ -100,8 +103,9 @@ Scope {
 
 							text: Weather.tempData + "°"
 							font.pixelSize: Appearance.fonts.large
-							color: Appearance.colors.withAlpha(Appearance.colors.on_primary_container, 0.2)
-							antialiasing: false
+							color: Appearance.colors.withAlpha(Appearance.colors.surface, 0.3)
+							antialiasing: true
+							font.bold: true
 						}
 
 						MatIcon {
@@ -109,8 +113,9 @@ Scope {
 
 							icon: "humidity_low"
 							font.pixelSize: Appearance.fonts.large
-							color: Appearance.colors.withAlpha(Appearance.colors.on_primary_container, 0.2)
-							antialiasing: false
+							color: Appearance.colors.withAlpha(Appearance.colors.surface, 0.3)
+							antialiasing: true
+							font.bold: true
 						}
 
 						StyledText {
@@ -118,8 +123,9 @@ Scope {
 
 							text: Weather.humidityData + "%"
 							font.pixelSize: Appearance.fonts.large
-							color: Appearance.colors.withAlpha(Appearance.colors.on_primary_container, 0.2)
-							antialiasing: false
+							color: Appearance.colors.withAlpha(Appearance.colors.surface, 0.3)
+							antialiasing: true
+							font.bold: true
 						}
 					}
 				}
