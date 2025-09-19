@@ -10,7 +10,7 @@ import qs.Data
 Scope {
 	id: root
 
-	property bool isBarOpen: false
+	property bool isBarOpen: true
 
 	Variants {
 		model: Quickshell.screens
