@@ -15,7 +15,7 @@ import qs.Components
 Rectangle {
 	Layout.fillWidth: true
 	Layout.fillHeight: true
-	color: Appearance.colors.withAlpha(Appearance.colors.surface, 0.7)
+	color: Appearance.colors.background
 	radius: Appearance.rounding.normal
 	border.color: Appearance.colors.outline
 	border.width: 2

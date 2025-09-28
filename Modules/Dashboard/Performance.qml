@@ -12,7 +12,7 @@ Rectangle {
 
 	anchors.centerIn: parent
 	radius: Appearance.rounding.normal
-	color: Appearance.colors.withAlpha(Appearance.colors.surface, 0.7)
+	color: Appearance.colors.background
 	border.color: Appearance.colors.outline
 	border.width: 2
 
@@ -130,6 +130,12 @@ Rectangle {
 					horizontalAlignment: Text.AlignHCenter
 					text: "Wired Download:\n" + SysUsage.formatSpeed(SysUsage.wiredDownloadSpeed)
 					color: Appearance.colors.on_surface
+
+					// Timer {
+					// 	running: true
+					// 	repeat: true
+					// 	interval: 2000
+					// }
 				}
 
 				StyledText {

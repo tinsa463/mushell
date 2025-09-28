@@ -38,7 +38,9 @@ Scope {
 				Rectangle {
 					anchors.fill: parent
 					radius: Appearance.rounding.normal
-					color: Appearance.colors.withAlpha(Appearance.colors.background, 0.7)
+					color: Appearance.colors.background
+					border.color: Appearance.colors.outline
+					border.width: 2
 
 					ColumnLayout {
 						anchors.fill: parent
@@ -108,8 +110,14 @@ Scope {
 
 									focus: rectDelegate.index === session.currentIndex
 
-									Keys.onEnterPressed: rectDelegate.modelData.action()
-									Keys.onReturnPressed: rectDelegate.modelData.action()
+									Keys.onEnterPressed: {
+										rectDelegate.modelData.action();
+										session.isSessionOpen = !session.isSessionOpen;
+									}
+									Keys.onReturnPressed: {
+										rectDelegate.modelData.action();
+										session.isSessionOpen = !session.isSessionOpen;
+									}
 									Keys.onUpPressed: session.currentIndex > 0 ? session.currentIndex-- : ""
 									Keys.onDownPressed: session.currentIndex < 3 ? session.currentIndex++ : ""
 									Keys.onEscapePressed: session.isSessionOpen = !session.isSessionOpen
@@ -129,7 +137,11 @@ Scope {
 
 										onClicked: {
 											parent.focus = true;
-											rectDelegate.modelData.action();
+											{
+												rectDelegate.modelData.action();
+												session.isSessionOpen = !session.isSessionOpen;
+											}
+											;
 										}
 
 										onEntered: parent.focus = true

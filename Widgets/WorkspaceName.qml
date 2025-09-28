@@ -8,7 +8,6 @@ import qs.Components
 Rectangle {
 	id: root
 
-
 	Layout.fillHeight: true
 	clip: true
 	// color: Appearance.colors.withAlpha(Appearance.colors.background, 0.79)
@@ -30,7 +29,7 @@ Rectangle {
 		readonly property Toplevel activeWindow: ToplevelManager.activeToplevel
 
 		anchors.centerIn: parent
-		color: Appearance.colors.on_primary_container
+		color: Appearance.colors.on_background
 		elide: Text.ElideMiddle
 		font.pixelSize: Appearance.fonts.medium
 		horizontalAlignment: Text.AlignHCenter

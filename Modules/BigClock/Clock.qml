@@ -48,8 +48,7 @@ Scope {
 						Layout.alignment: Qt.AlignCenter
 						text: Qt.formatDateTime(Time?.date, "h:mm AP")
 						font.pixelSize: Appearance.fonts.extraLarge * 2.5
-						font.family: "Audiowide"
-						font.italic: true
+						font.family: "Inter"
 						font.bold: true
 						antialiasing: true
 						color: Appearance.colors.withAlpha(Appearance.colors.surface, 0.5)

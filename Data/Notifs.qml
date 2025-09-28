@@ -12,8 +12,7 @@ Singleton {
 		readonly property var notificationCount: popupNotifications.length
 		property list<QtObject> popupNotifications: []
 		property list<QtObject> listNotifications: []
-		property int maxVisible: 5
-		property bool isDnDDisabled: false
+		property bool disabledDnD: false
 		property NotificationServer server: NotificationServer {
 			actionIconsSupported: true
 			actionsSupported: true

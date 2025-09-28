@@ -47,18 +47,16 @@ Scope {
 			exclusiveZone: 1
 			surfaceFormat.opaque: false
 
-			Image {
+			AnimatedImage {
 				id: img
 
-				antialiasing: false
+				antialiasing: true
 				asynchronous: true
-				layer.enabled: true
-				// retainWhileLoading: true
+				mipmap: true
 				smooth: true
 
-				source: {
-					root.wallSrc.trim();
-				}
+				source: root.wallSrc.trim()
+
 				fillMode: Image.PreserveAspectFit
 				width: parent.width
 				height: parent.height

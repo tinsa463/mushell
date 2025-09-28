@@ -46,7 +46,9 @@ Scope {
 				Rectangle {
 					anchors.fill: parent
 					radius: Appearance.rounding.large
-					color: Appearance.colors.withAlpha(Appearance.colors.background, 0.7)
+					color: Appearance.colors.background
+					border.color: Appearance.colors.outline
+					border.width: 2
 
 					property int padding: Appearance.spacing.large
 

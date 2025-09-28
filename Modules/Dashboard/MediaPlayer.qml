@@ -13,12 +13,9 @@ import qs.Components
 Rectangle {
 	id: root
 
-	property int index
-	readonly property MprisPlayer player: Mpris.players.values[index]
-
 	Layout.fillWidth: true
 	Layout.fillHeight: true
-	color: Appearance.colors.withAlpha(Appearance.colors.surface, 0.7)
+	color: Player.active == null ? Appearance.colors.withAlpha(Appearance.colors.background, 0.8) : Appearance.colors.withAlpha(Appearance.colors.background, 0.5)
 	radius: Appearance.rounding.normal
 	border.color: Appearance.colors.outline
 	border.width: 2
@@ -36,7 +33,7 @@ Rectangle {
 
 			anchors.fill: parent
 
-			visible: root.player === null
+			visible: Player.active == null
 			source: Qt.resolvedUrl("root:/Assets/kuru.gif")
 		}
 
@@ -46,7 +43,7 @@ Rectangle {
 			anchors.fill: parent
 
 			visible: false
-			source: root.player.trackArtUrl
+			source: Player.active.trackArtUrl
 			fillMode: Image.PreserveAspectCrop
 		}
 
@@ -75,13 +72,6 @@ Rectangle {
 				radius: root.radius
 			}
 		}
-
-		// Make title readable
-		// Rectangle {
-		// 	anchors.fill: parent
-		//
-		// 	color: root.player === null ? "transparent" : Appearance.colors.withAlpha(Appearance.colors.shadow, 0.06)
-		// }
 	}
 
 	function formatTime(seconds) {
@@ -129,7 +119,7 @@ Rectangle {
 							property string notFoundImage: Qt.resolvedUrl(Quickshell.shellDir + "/Assets/image_not_found.svg")
 
 							visible: false
-							source: root.player === null ? notFoundImage : Qt.resolvedUrl(root.player.trackArtUrl)
+							source: Player.active == null ? notFoundImage : Qt.resolvedUrl(Player.active.trackArtUrl)
 							fillMode: Image.PreserveAspectCrop
 						}
 
@@ -161,7 +151,7 @@ Rectangle {
 							id: titleText
 
 							anchors.horizontalCenter: parent.horizontalCenter
-							text: root.player === null ? "null" : root.player.trackTitle
+							text: Player.active == null ? "null" : Player.active.trackTitle
 							color: Appearance.colors.on_background
 							font.pixelSize: Appearance.fonts.medium * 1.5
 							font.bold: true
@@ -174,7 +164,7 @@ Rectangle {
 							id: artistText
 
 							anchors.horizontalCenter: parent.horizontalCenter
-							text: root.player === null ? "null" : root.player.trackArtist
+							text: Player.active == null ? "null" : Player.active.trackArtist
 							color: Appearance.colors.on_background
 							font.pixelSize: Appearance.fonts.medium * 1.1
 							opacity: 0.8
@@ -193,23 +183,23 @@ Rectangle {
 								{
 									icon: "skip_previous",
 									action: () => {
-										if (!root.player.canGoPrevious) {
+										if (!Player.active.canGoPrevious) {
 											console.log("Can't go back");
 											return;
 										}
-										root.player.previous();
+										Player.active.previous();
 									}
 								},
 								{
-									icon: root.player.playbackState === MprisPlaybackState.Playing ? "pause_circle" : "play_circle",
+									icon: Player.active.playbackState === MprisPlaybackState.Playing ? "pause_circle" : "play_circle",
 									action: () => {
-										root.player.togglePlaying();
+										Player.active.togglePlaying();
 									}
 								},
 								{
 									icon: "skip_next",
 									action: () => {
-										root.player.next();
+										Player.active.next();
 									}
 								}
 							]
@@ -267,26 +257,30 @@ Rectangle {
 							id: timeTrack
 
 							anchors.horizontalCenter: parent.horizontalCenter
-							text: root.player === null ? "00:00" : root.formatTime(root.player.position)
+							text: Player.active == null ? "00:00" : root.formatTime(Player.active.position)
 							color: Appearance.colors.on_background
 
 							Timer {
-								running: root.player.playbackState == MprisPlaybackState.Playing
+								running: Player.active.playbackState == MprisPlaybackState.Playing
 								interval: 100
 								repeat: true
-								onTriggered: root.player.positionChanged()
+								onTriggered: Player.active.positionChanged()
 							}
 						}
 
 						StyledSlide {
-							value: root.player.length > 0 ? root.player.position / root.player.length : 0
+							id: barSlide
+
+							value: Player.active.length > 0 ? Player.active.position / Player.active.length : 0
 
 							FrameAnimation {
-								running: root.player.playbackState == MprisPlaybackState.Playing
-								onTriggered: root.player.positionChanged()
+								running: Player.active.playbackState == MprisPlaybackState.Playing
+								onTriggered: {
+									Player.active.positionChanged();
+								}
 							}
 
-							onMoved: root.player.position = value * root.player.length
+							onMoved: Player.active.position = value * Player.active.length
 						}
 					}
 				}

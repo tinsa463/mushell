@@ -12,7 +12,7 @@ Rectangle {
 	implicitHeight: 420
 
 	radius: Appearance.rounding.normal
-	color: Appearance.colors.withAlpha(Appearance.colors.surface, 0.7)
+	color: Appearance.colors.background
 	border.color: Appearance.colors.outline
 	border.width: 2
 

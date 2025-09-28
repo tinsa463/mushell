@@ -37,6 +37,9 @@ Rectangle {
 			icon: root.icon
 			Layout.alignment: Qt.AlignVCenter
 			font.pixelSize: Appearance.fonts.large * 1.2
+			font.variableAxes: {
+				"FILL": 10
+			}
 		}
 
 		StyledText {
@@ -56,11 +59,8 @@ Rectangle {
 		anchors.fill: parent
 
 		onClicked: mevent => {
-			if (mevent.button === Qt.MiddleButton) {
+			if (mevent.button === Qt.MiddleButton)
 				Audio.toggleMute(root.node);
-			} else if (mevent.button === Qt.LeftButton) {
-				mixer.visible = !mixer.visible;
-			}
 		}
 
 		onWheel: mevent => Audio.wheelAction(mevent, root.node)

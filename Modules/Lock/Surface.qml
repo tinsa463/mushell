@@ -3,12 +3,11 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Effects
-import Quickshell.Io
 import QtQuick.Layouts
-import QtQuick.Controls.Fusion
 import Quickshell.Wayland
 
 import qs.Data
+import qs.Components
 
 WlSessionLockSurface {
 	id: root

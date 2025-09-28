@@ -40,7 +40,7 @@ Scope {
 			Rectangle {
 				id: base
 
-				color: Appearance.colors.withAlpha(Appearance.colors.background, 0.7)
+				color: Appearance.colors.background
 				radius: Appearance.rounding.large
 				anchors.fill: parent
 				anchors.margins: 4
@@ -68,13 +68,13 @@ Scope {
 					}
 				}
 			}
+		}
+	}
+	IpcHandler {
+		target: "layerShell"
 
-			IpcHandler {
-				target: "layerShell"
-				function toggle(): void {
-					root.isBarOpen = !root.isBarOpen;
-				}
-			}
+		function toggle(): void {
+			root.isBarOpen = !root.isBarOpen;
 		}
 	}
 }

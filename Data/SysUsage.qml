@@ -234,6 +234,7 @@ Singleton {
 		path: "/proc/stat"
 		onLoaded: {
 			const data = text();
+			// Idk what the fuck this is
 			const match = data.match(/^cpu\s+(\d+)(?:\s+(\d+))?(?:\s+(\d+))?(?:\s+(\d+))?(?:\s+(\d+))?(?:\s+(\d+))?(?:\s+(\d+))?(?:\s+(\d+))?(?:\s+(\d+))?(?:\s+(\d+))?/m);
 
 			if (match) {

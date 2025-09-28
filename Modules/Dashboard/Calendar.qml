@@ -10,7 +10,7 @@ import qs.Components
 
 Rectangle {
 	anchors.fill: parent
-	color: Appearance.colors.withAlpha(Appearance.colors.background, 0.7)
+	color: Appearance.colors.background
 	radius: Appearance.rounding.normal
 	border.color: Appearance.colors.outline
 	border.width: 2
@@ -25,7 +25,7 @@ Rectangle {
 		property date currentDate: new Date()
 		property int currentYear: currentDate.getFullYear()
 		property int currentMonth: currentDate.getMonth()
-		property int cellWidth: Math.floor((width - anchors.margins * 2) / 7)
+		property int cellWidth: Math.floor((width - anchors.margins * 2) / 7.2)
 
 		RowLayout {
 			Layout.fillWidth: true
@@ -157,7 +157,7 @@ Rectangle {
 			Layout.topMargin: Appearance.spacing.small
 
 			property int cellWidth: root.cellWidth
-			property int cellHeight: Math.floor(height / 7.2)
+			property int cellHeight: Math.floor(height / 7)
 
 			month: root.currentMonth
 			year: root.currentYear

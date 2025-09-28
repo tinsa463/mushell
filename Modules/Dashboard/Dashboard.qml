@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
+import QtQuick.Effects
 import QtQuick.Layouts
 
 import Quickshell
@@ -48,9 +49,9 @@ Scope {
 			WlrLayershell.namespace: "shell:dashboard"
 			visible: true
 			focusable: true
-			color: "transparent"
+			color: Appearance.colors.withAlpha(Appearance.colors.background, 0.2)
 			screen: modelData
-			exclusiveZone: 0
+			exclusiveZone: -1
 			implicitWidth: root.baseWidth
 			implicitHeight: root.baseHeight
 
@@ -80,21 +81,6 @@ Scope {
 							Inbox.Header {}
 
 							Inbox.Notification {}
-
-							Loader {
-								id: weatherLoader
-
-								Layout.fillWidth: true
-								Layout.preferredHeight: 350
-								Layout.topMargin: 8
-								active: root.isDashboardOpen
-								asynchronous: true
-								sourceComponent: WeatherWidget {
-									Layout.fillWidth: true
-									Layout.preferredHeight: 350
-									Layout.topMargin: 8
-								}
-							}
 						}
 
 						ColumnLayout {
@@ -109,18 +95,24 @@ Scope {
 								id: performanceLoader
 
 								Layout.fillWidth: true
-								Layout.preferredHeight: 450
+								Layout.preferredHeight: 400
 								active: root.isDashboardOpen
 								sourceComponent: Performance {}
 							}
 
 							Loader {
-								id: audioLoader
+								id: weatherLoader
 
 								Layout.fillWidth: true
-								Layout.fillHeight: true
+								Layout.preferredHeight: 350
+								Layout.topMargin: 8
 								active: root.isDashboardOpen
-								sourceComponent: QS.Quicksettings {}
+								asynchronous: true
+								sourceComponent: WeatherWidget {
+									Layout.fillWidth: true
+									Layout.preferredHeight: 350
+									Layout.topMargin: 8
+								}
 							}
 						}
 

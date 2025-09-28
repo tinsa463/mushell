@@ -69,11 +69,7 @@ Rectangle {
 					color: trayItemArea.containsMouse ? Appearance.colors.primary : "transparent"
 
 					Behavior on color {
-						ColorAnimation {
-							duration: 200
-							easing.type: Easing.BezierSpline
-							easing.bezierCurve: Appearance.animations.curves.standard
-						}
+						ColAnim {}
 					}
 				}
 

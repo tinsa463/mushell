@@ -8,7 +8,7 @@ import qs.Components
 Rectangle {
 	Layout.fillWidth: true
 	Layout.preferredHeight: 60
-	color: Appearance.colors.withAlpha(Appearance.colors.surface, 0.7)
+	color: Appearance.colors.background
 	radius: Appearance.rounding.normal
 	border.color: Appearance.colors.outline
 	border.width: 2
@@ -34,9 +34,9 @@ Rectangle {
 					}
 				},
 				{
-					icon: Notifs.notifications.isDnDDisabled ? "notifications_off" : "notifications_active",
+					icon: Notifs.notifications.disabledDnD ? "notifications_off" : "notifications_active",
 					action: () => {
-						Notifs.notifications.isDnDDisabled = !Notifs.notifications.isDnDDisabled;
+						Notifs.notifications.disabledDnD = !Notifs.notifications.disabledDnD;
 					}
 				}
 			]

@@ -1,8 +1,10 @@
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
 
 import qs.Data
 import qs.Helpers
+import qs.Components
 
 Rectangle {
 	Layout.fillHeight: true
@@ -20,6 +22,18 @@ Rectangle {
 			font.family: Appearance.fonts.family_Mono
 			font.pixelSize: Appearance.fonts.large * 1.7
 			icon: "󱄅"
+
+			MouseArea {
+				id: mArea
+
+				anchors.fill: parent
+				hoverEnabled: true
+				cursorShape: Qt.PointingHandCursor
+				onClicked: menu.isMenuOpen = !menu.isMenuOpen
+			}
 		}
+	}
+	Menu {
+		id: menu
 	}
 }
