@@ -17,7 +17,7 @@ Scope {
 			this.reload();
 			Quickshell.execDetached({
 				// What the fuck is this
-				command: ["sh", "-c", `${Quickshell.shellDir}/Assets/generate_colors.sh ${Quickshell.shellDir}/Data/Appearance.qml && ${Quickshell.shellDir}/Assets/generate_colors.sh ${Quickshell.shellDir}/Data/Appearance.qml`]
+				command: ["sh", "-c", `${Quickshell.shellDir}/Assets/generate_colors.sh ${Quickshell.shellDir}/Data/Appearance.qml`]
 			});
 		}
 		onAdapterUpdated: writeAdapter()
@@ -47,7 +47,7 @@ Scope {
 			exclusiveZone: 1
 			surfaceFormat.opaque: false
 
-			AnimatedImage {
+			Image {
 				id: img
 
 				antialiasing: true
