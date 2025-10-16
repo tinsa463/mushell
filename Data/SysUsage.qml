@@ -58,6 +58,7 @@ Singleton {
 			onStreamFinished: {
 				const data = text.trim();
 				root.wiredInterface = root.parseInterfaceState(data, "ethernet");
+				// networkWiredInterfacesState.running = false;
 			}
 		}
 	}
@@ -70,6 +71,7 @@ Singleton {
 			onStreamFinished: {
 				const data = text.trim();
 				root.wirelessInterface = root.parseInterfaceState(data, "wifi");
+				// networkWirelessInterfacesState.running = false;
 			}
 		}
 	}
@@ -267,16 +269,16 @@ Singleton {
 
 	Timer {
 		running: true
-		interval: 1000
+		interval: 3000
 		repeat: true
 		triggeredOnStart: true
 		onTriggered: {
+			diskinfo.running = true;
+			networkWiredInterfacesState.started();
+			networkWirelessInterfacesState.started();
 			stat.reload();
 			meminfo.reload();
 			networkInfo.reload();
-			diskinfo.running = true;
-			networkWiredInterfacesState.running = true;
-			networkWirelessInterfacesState.running = true;
 		}
 	}
 }
