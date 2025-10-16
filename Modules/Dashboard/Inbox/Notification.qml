@@ -13,7 +13,7 @@ import qs.Helpers
 import qs.Components
 
 Loader {
-	active: dashboardLoader.activeAsync
+	active: true
 
 	anchors.fill: parent
 
@@ -74,8 +74,31 @@ Loader {
 
 						width: listViewNotifs.width
 						height: Math.max(120, contentLayout.implicitHeight + 10)
-						color: Colors.withAlpha(Colors.dark.surface_container, 0.7)
+						color: Colors.withAlpha(Colors.colors.on_background, 0.07)
 						radius: Appearance.rounding.normal
+
+						MouseArea {
+							id: delegateMouseNotif
+
+							anchors.fill: parent
+							hoverEnabled: true
+
+							drag {
+								axis: Drag.XAxis
+								target: flickDelegate
+
+								onActiveChanged: {
+									if (delegateMouseNotif.drag.active)
+										return;
+
+									if (Math.abs(flickDelegate.x) > (flickDelegate.width * 0.45)) {
+										Notifs.notifications.removePopupNotification(flickDelegate.modelData);
+										Notifs.notifications.removeListNotification(flickDelegate.modelData);
+									} else
+										flickDelegate.x = 0;
+								}
+							}
+						}
 
 						RowLayout {
 							id: contentLayout
