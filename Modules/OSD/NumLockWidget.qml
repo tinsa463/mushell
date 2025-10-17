@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
@@ -7,11 +9,9 @@ import qs.Helpers
 import qs.Components
 
 LazyLoader {
-	id: numLockOsdLoader
+	id: numLockOSDLoader
 
-	required property bool numLockOSDStatus
-
-	active: numLockOSDStatus
+	active: false
 	component: PanelWindow {
 		anchors.bottom: true
 		WlrLayershell.namespace: "shell:osd:numlock"
@@ -40,8 +40,8 @@ LazyLoader {
 				}
 
 				MatIcon {
-					icon: KeyLockState.numLockState ? "lock" : "lock_open_right"
-					color: KeyLockState.numLockState ? Colors.colors.primary : Colors.colors.tertiary
+					icon: numLockOSDLoader.active ? "lock" : "lock_open_right"
+					color: numLockOSDLoader.active ? Colors.colors.primary : Colors.colors.tertiary
 					font.pixelSize: Appearance.fonts.large * 1.5
 				}
 			}

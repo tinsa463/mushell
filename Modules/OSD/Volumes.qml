@@ -11,10 +11,10 @@ import qs.Components
 LazyLoader {
 	id: volumeOsdLoader
 
-	required property bool volumeOSDStatus
-
-	active: volumeOSDStatus
+	active: false
 	component: PanelWindow {
+		id: root
+
 		anchors.bottom: true
 		WlrLayershell.namespace: "shell:osd:volume"
 		color: "transparent"
@@ -25,6 +25,9 @@ LazyLoader {
 		exclusiveZone: 0
 		margins.bottom: 30
 		mask: Region {}
+
+		property string icon: Audio.getIcon(root.node)
+		property PwNode node: Pipewire.defaultAudioSink
 
 		StyledRect {
 			anchors.fill: parent
@@ -43,6 +46,12 @@ LazyLoader {
 					icon: root.icon
 					Layout.alignment: Qt.AlignVCenter
 					font.pixelSize: Appearance.fonts.extraLarge * 1.2
+				}
+
+				StyledText {
+					text: Math.round(Pipewire.defaultAudioSink?.audio.volume * 100)
+					color: Colors.colors.on_background
+					font.pixelSize: Appearance.fonts.large
 				}
 
 				StyledRect {

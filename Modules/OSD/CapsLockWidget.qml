@@ -9,9 +9,7 @@ import qs.Components
 LazyLoader {
 	id: capsLockOsdLoader
 
-	required property bool capsLockOSDStatus
-
-	active: capsLockOSDStatus
+	active: false
 	component: PanelWindow {
 		anchors.bottom: true
 		WlrLayershell.namespace: "shell:osd:capslock"

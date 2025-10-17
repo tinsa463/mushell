@@ -15,21 +15,15 @@ Scope {
 
 	Connections {
 		target: KeyLockState
-
 		function onCapsLockStateChanged() {
-			root.isCapsLockOSDShow = KeyLockState.capsLockState;
-			if (KeyLockState.capsLockState)
-				hideOSDTimer.restart();
+			root.isCapsLockOSDShow = true;
+			hideOSDTimer.restart();
 		}
 		function onNumLockStateChanged() {
-			root.isNumLockOSDShow = KeyLockState.numLockState;
-			if (KeyLockState.numLockState)
-				hideOSDTimer.restart();
+			root.isNumLockOSDShow = true;
+			hideOSDTimer.restart();
 		}
 	}
-
-	property string icon: Audio.getIcon(root.node)
-	property PwNode node: Pipewire.defaultAudioSink
 
 	PwObjectTracker {
 		objects: [Pipewire.defaultAudioSink]
@@ -55,14 +49,14 @@ Scope {
 	}
 
 	Volumes {
-		volumeOSDStatus: root.isVolumeOSDShow
+		active: root.isVolumeOSDShow
 	}
 
 	CapsLockWidget {
-		capsLockOSDStatus: root.isCapsLockOSDShow
+		active: root.isCapsLockOSDShow
 	}
 
 	NumLockWidget {
-		numLockOSDStatus: root.isNumLockOSDShow
+		active: root.isNumLockOSDShow
 	}
 }

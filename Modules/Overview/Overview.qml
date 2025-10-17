@@ -19,12 +19,10 @@ Scope {
 	property real scaleFactor: 0.2
 	property real borderWidth: 2
 	property bool wallpaperEnabled: true
-	property bool iconsEnabled: true
-	property bool isOverviewOpen: false
 
 	GlobalShortcut {
 		name: "overview"
-		onPressed: scope.isOverviewOpen = !scope.isOverviewOpen
+		onPressed: lazyloader.active = !lazyloader.active
 	}
 
 	Connections {
@@ -40,7 +38,7 @@ Scope {
 	LazyLoader {
 		id: lazyloader
 
-		active: scope.isOverviewOpen
+		active: false
 
 		component: PanelWindow {
 			id: root
