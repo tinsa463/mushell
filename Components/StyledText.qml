@@ -8,7 +8,7 @@ Text {
 
 	font.family: Appearance.fonts.family_Sans
 	font.pixelSize: Appearance.fonts.medium
-	font.hintingPreference: Font.PreferFullHinting
+	font.hintingPreference: Font.PreferDefaultHinting
 
 	color: "transparent"
 	renderType: Text.NativeRendering
