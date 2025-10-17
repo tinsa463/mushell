@@ -9,7 +9,7 @@ import qs.Modules.Session
 import qs.Modules.Launcher
 import qs.Modules.Notifications
 import qs.Modules.Dashboard
-import qs.Modules.BigClock
+// import qs.Modules.BigClock
 import qs.Modules.OSD
 import qs.Modules.Overview
 
@@ -25,7 +25,7 @@ ShellRoot {
 	Screencapture {}
 	Notifications {}
 	Dashboard {}
-	Clock {}
+	// Clock {}
 	OSD {}
 	Overview {}
 
