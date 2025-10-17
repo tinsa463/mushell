@@ -113,6 +113,7 @@ StyledRect {
 							}
 
 							if (validWindow) {
+								// Thx Hanabi for the best solution to fix tray anchor relative position
 								menuAnchor.menu = delegateTray.modelData?.menu;
 								menuAnchor.anchor.window = validWindow;
 								menuAnchor.anchor.rect = delegateTray.QsWindow.window.contentItem.mapFromItem(delegateTray, 0, delegateTray.height, delegateTray.width, delegateTray.width);
