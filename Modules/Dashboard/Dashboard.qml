@@ -7,6 +7,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
+import Quickshell.Hyprland
 
 import qs.Data
 import qs.Components
@@ -17,65 +18,57 @@ Scope {
 
 	property bool isDashboardOpen: false
 	property int currentIndex: 0
-	property int baseWidth: 1366
-	property int baseHeight: 768
-	property int baseSectionWidth: 455
-	property int baseSectionHeight: baseWidth
 	property int cpuUsage: 0
 	property int ramUsage: 0
-
 	function toggleDashboard(): void {
 		isDashboardOpen = !isDashboardOpen;
 	}
-
 	LazyLoader {
 		id: dashboardLoader
 
 		active: root.isDashboardOpen
-
 		component: PanelWindow {
 			id: dashboard
-
 			property ShellScreen modelData
-
 			anchors {
 				top: true
 				bottom: true
 				right: true
 				left: true
 			}
-
+			property HyprlandMonitor monitor: Hyprland.monitorFor(screen)
+			property double monitorWidth: monitor.width / monitor.scale
+			property double monitorHeight: monitor.height / monitor.scale
+			property int baseSectionWidth: monitorWidth / 3
+			property int baseSectionHeight: monitorWidth
 			WlrLayershell.namespace: "shell:dashboard"
 			visible: true
 			focusable: true
 			color: Colors.withAlpha(Colors.colors.background, 0.2)
 			screen: modelData
 			exclusiveZone: -1
-			implicitWidth: root.baseWidth
-			implicitHeight: root.baseHeight
+			implicitWidth: monitorWidth
+			implicitHeight: monitorHeight
 
 			StyledRect {
 				anchors.fill: parent
 				anchors.margins: 20
 				color: "transparent"
-
 				Item {
 					anchors.fill: parent
 					focus: true
 					Keys.onEscapePressed: root.toggleDashboard()
-
 					RowLayout {
 						anchors.fill: parent
 						spacing: Appearance.spacing.large
-
 						ColumnLayout {
 							id: notifsAndWeatherLayout
+
 							Layout.fillWidth: true
 							Layout.alignment: Qt.AlignTop
 							Layout.maximumHeight: parent.height
-							Layout.preferredWidth: root.baseWidth / 3
+							Layout.preferredWidth: dashboard.monitorWidth * 0.3
 							Layout.minimumWidth: 400
-
 							Loader {
 								Layout.fillWidth: true
 								Layout.preferredHeight: parent.height * 0.06
@@ -83,7 +76,6 @@ Scope {
 								asynchronous: true
 								sourceComponent: Inbox.Header {}
 							}
-
 							Loader {
 								Layout.fillWidth: true
 								Layout.preferredHeight: parent.height - 70
@@ -92,24 +84,20 @@ Scope {
 								sourceComponent: Inbox.Notification {}
 							}
 						}
-
 						ColumnLayout {
 							id: performanceLayout
 
 							Layout.fillWidth: true
 							Layout.fillHeight: true
-							Layout.preferredWidth: root.baseWidth / 3
+							Layout.preferredWidth: dashboard.monitorWidth / 3
 							Layout.minimumWidth: 400
-
 							Loader {
 								id: performanceLoader
-
 								Layout.fillWidth: true
 								Layout.preferredHeight: 400
 								active: root.isDashboardOpen
 								sourceComponent: Performance {}
 							}
-
 							Loader {
 								id: weatherLoader
 
@@ -125,25 +113,21 @@ Scope {
 								}
 							}
 						}
-
 						ColumnLayout {
 							id: mprisLayout
 
 							Layout.fillWidth: true
 							Layout.fillHeight: true
-							Layout.preferredWidth: root.baseWidth / 3
+							Layout.preferredWidth: dashboard.monitorWidth / 3
 							Layout.minimumWidth: 400
-
 							Loader {
 								id: mediaPlayerLoader
-
 								Layout.fillWidth: true
 								Layout.fillHeight: true
 								active: root.isDashboardOpen
 								asynchronous: true
 								sourceComponent: MediaPlayer {}
 							}
-
 							Loader {
 								id: calendarLoader
 
@@ -162,10 +146,8 @@ Scope {
 			}
 		}
 	}
-
 	IpcHandler {
 		target: "dashboard"
-
 		function toggle(): void {
 			root.toggleDashboard();
 		}
