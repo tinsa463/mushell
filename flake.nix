@@ -1,5 +1,5 @@
 {
-  description = "kurukuru quickshell config";
+  description = "quickshell config";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -15,6 +15,7 @@
     quickshell,
   }: let
     lib = nixpkgs.lib;
+    src = ./.;
     perSystem = package: (lib.listToAttrs (lib.map (a: {
       name = a;
       value = package {
@@ -22,32 +23,36 @@
         system = a;
       };
     }) (lib.attrNames nixpkgs.legacyPackages)));
-    makeQmlPath = pkgs: lib.makeSearchPath "lib/qt-6/qml" (map (path: "${path}") pkgs);
-    qmlPath = pkgs:
-      makeQmlPath [
-        quickshell.packages.${pkgs.system}.default
-        pkgs.libsForQt5.qt5.qtgraphicaleffects
-        pkgs.kdePackages.full
-      ];
   in {
     packages = perSystem ({
       pkgs,
       system,
     }: rec {
-      shell = let
-        dependencies = [
-          pkgs.material-symbols
-          pkgs.nerd-fonts.hack
-          pkgs.inter
-          quickshell.packages.${system}.default
-        ];
-      in
-        pkgs.writeShellScriptBin "shell" ''
-          export PATH="${lib.makeBinPath dependencies}:$PATH"
-          export QML2_IMPORT_PATH="${qmlPath pkgs}"
-          ${quickshell.packages.${system}.default}/bin/quickshell $@
-        '';
+      shell = pkgs.writeShellScriptBin "shell" ''
+        ${quickshell.packages.${system}.default}/bin/quickshell
+      '';
       default = shell;
+
+      systemd.user.services.shell = {
+        Unit = {
+          Description = "Shell widget using quickshell";
+          After = ["hyprland-session.target"];
+        };
+        Service = {
+          Type = "exec";
+          ExecStart = "${default}/bin/shell -p ${src}";
+          Restart = "on-failure";
+          Slice = "app-graphical.slice";
+        };
+        Install = {
+          WantedBy = ["hyprland-session.target"];
+        };
+      };
+
+      prePatch = ''
+        substituteInPlace shell.qml \
+        	--replace-fail 'ShellRoot {' 'ShellRoot {  settings.watchFiles: false'
+      '';
     });
     devShells = perSystem ({
       pkgs,
@@ -56,14 +61,7 @@
       default = pkgs.mkShell {
         packages = [
           self.packages.${system}.default
-          pkgs.kdePackages.qtdeclarative
         ];
-
-        QML2_IMPORT_PATH = qmlPath pkgs;
-
-        shellHook = ''
-          export QS_CONFIG_PATH="$(pwd)/src"
-        '';
       };
     });
   };
